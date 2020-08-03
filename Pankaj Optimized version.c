@@ -20,17 +20,22 @@ void pwm_val()
 //		T2CON=0X01;   /*Prescale4 */
 //    	//TMR2 = 0;
 //		CCP1CON=0x0C;               /* Set the PWM duty cycle by writing to the CCPR1L register and CCP1CON<5:4>bits*/
- 
-		CCPR1L= 0.0002*adc_val+0.001*adc_val ;   
+		
+	
+
+ 		float bb ;
+		bb= 0.0002*adc_val+0.001*adc_val ;   
 				          /* Set the duty cycle period by writing to the CCPR1L register ,  calculation CCPR1L : CCP1CON<5:4> =( PR2+1)(Duty Cylcle/100)*/
                           /* CCPR1L= (64+1)(25/100)=16.25 ~16 */
+		CCPR1L =bb ;
 
 		T2CONbits.T2CKPS1=0;      /* Timer2 clock prescalar select bit                            */
 		T2CONbits.T2CKPS0=1;       
 		T2CONbits.TMR2ON=1;       /*  Timer2 ON bit                                      */
-		PR2=0.2499*adc_val;       /*TON=PR2  , calculate TON based on duty cycle   TON=Duty Cycle*Total Period(255)/100  ,   TON= 25*255/100=63.750~ 64 */
-
 		
+		PR2=0.2499*adc_val;       /*TON=PR2  , calculate TON based on duty cycle   TON=Duty Cycle*Total Period(255)/100  ,   TON= 25*255/100=63.750~ 64 */
+		//IN1 = 1;
+		//IN2 = 0;
 
 }
 
